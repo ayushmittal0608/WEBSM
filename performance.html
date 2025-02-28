@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Management Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        .sidebar {
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            padding-top: 20px;
+        }
+        .sidebar .nav-link {
+            color: white;
+            margin: 5px 0;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #34495e;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .dashboard-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar">
+                <h3 class="text-center mb-4">WebSM</h3>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="bi bi-speedometer2"></i> Overview
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="server.html">
+                            <i class="bi bi-hdd-rack"></i> Servers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="performance.html">
+                            <i class="bi bi-graph-up"></i> Performance
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="security.html">
+                            <i class="bi bi-shield-check"></i> Security
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="bi bi-gear"></i> Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logs.html">
+                            <i class="bi bi-file-text"></i> Logs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="users.html">
+                            <i class="bi bi-people"></i> Users
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Analytics Graphs Section -->
+            <div class="col-md-9 col-lg-10 graphs-section" style="margin-left: auto; padding: 20px;">
+                <h2>Performance Monitoring</h2>
+                <!-- Performance Metrics Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">CPU Usage (localhost:1000)</h5>
+                                <h2 class="text-primary mb-0" id="cpuUsage">0%</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Memory Usage (localhost:1000)</h5>
+                                <h2 class="text-success mb-0" id="memoryUsage">0 MB</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Disk Space (localhost:1000)</h5>
+                                <h2 class="text-warning mb-0" id="diskUsage">0 GB</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Network Usage (localhost:1000)</h5>
+                                <h2 class="text-info mb-0" id="networkUsage">0 KB/s</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Charts -->
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">localhost:1000 - CPU & Memory Usage Over Time</h5>
+                                <canvas id="resourcesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">localhost:1000 - Network Traffic</h5>
+                                <canvas id="networkChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Chart.js -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                    const SERVER_URL = 'http://localhost:1000';
+                    
+                    // Initialize charts
+                    const resourcesCtx = document.getElementById('resourcesChart').getContext('2d');
+                    const networkCtx = document.getElementById('networkChart').getContext('2d');
+
+                    // Resources Chart
+                    const resourcesChart = new Chart(resourcesCtx, {
+                        type: 'line',
+                        data: {
+                            labels: [],
+                            datasets: [{
+                                label: 'CPU Usage (%)',
+                                borderColor: 'rgb(13, 110, 253)',
+                                data: []
+                            }, {
+                                label: 'Memory Usage (MB)',
+                                borderColor: 'rgb(25, 135, 84)',
+                                data: []
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    // Network Chart
+                    const networkChart = new Chart(networkCtx, {
+                        type: 'line',
+                        data: {
+                            labels: [],
+                            datasets: [{
+                                label: 'Network Usage (KB/s)',
+                                borderColor: 'rgb(13, 202, 240)',
+                                data: []
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    // Function to update charts with new data
+                    function updateCharts(cpuUsage, memoryUsage, networkUsage) {
+                        const timestamp = new Date().toLocaleTimeString();
+                        
+                        // Update resources chart
+                        resourcesChart.data.labels.push(timestamp);
+                        resourcesChart.data.datasets[0].data.push(cpuUsage);
+                        resourcesChart.data.datasets[1].data.push(memoryUsage);
+                        
+                        // Keep last 10 data points
+                        if (resourcesChart.data.labels.length > 10) {
+                            resourcesChart.data.labels.shift();
+                            resourcesChart.data.datasets[0].data.shift();
+                            resourcesChart.data.datasets[1].data.shift();
+                        }
+                        
+                        // Update network chart
+                        networkChart.data.labels.push(timestamp);
+                        networkChart.data.datasets[0].data.push(networkUsage);
+                        
+                        if (networkChart.data.labels.length > 10) {
+                            networkChart.data.labels.shift();
+                            networkChart.data.datasets[0].data.shift();
+                        }
+                        
+                        resourcesChart.update();
+                        networkChart.update();
+                    }
+
+                    // Function to fetch metrics from localhost:1000
+                    async function fetchServerMetrics() {
+                        try {
+                            const response = await fetch(`${SERVER_URL}`);
+                            if (!response.ok) {
+                                throw new Error('Server metrics not available');
+                            }
+                            return await response.json();
+                        } catch (error) {
+                            console.error('Error fetching metrics:', error);
+                            // Return simulated data if server metrics are not available
+                            return {
+                                cpu: Math.random() * 100,
+                                memory: Math.random() * 1000,
+                                disk: Math.random() * 100,
+                                network: Math.random() * 1000
+                            };
+                        }
+                    }
+
+                    // Update metrics every 2 seconds
+                    setInterval(async () => {
+                        const metrics = await fetchServerMetrics();
+
+                        // Update metrics display
+                        document.getElementById('cpuUsage').textContent = `${metrics.cpu.toFixed(1)}%`;
+                        document.getElementById('memoryUsage').textContent = `${metrics.memory.toFixed(1)} MB`;
+                        document.getElementById('diskUsage').textContent = `${metrics.disk.toFixed(1)} GB`;
+                        document.getElementById('networkUsage').textContent = `${metrics.network.toFixed(1)} KB/s`;
+
+                        // Update charts
+                        updateCharts(metrics.cpu, metrics.memory, metrics.network);
+                    }, 2000);
+                </script>
+            </div>
+
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

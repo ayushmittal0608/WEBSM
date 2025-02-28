@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Channels</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .flex-container {
+      display: flex;
+      justify-content:space-evenly;
+      width: 1200px;
+      padding-bottom: 20px;
+      box-shadow: 0px 0px 5px 0px;
+      padding-left: 50px;
+    }
+
+    .flex-item.flex-item{
+      flex: 1;
+      color: #000000;
+      padding: 20px;
+      margin: 10px;
+      text-align: center;
+      transition: background-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      display:inline;
+      column-gap:normal;
+    }
+
+    button{
+      border-radius: 50px;
+      padding: 20px;
+      margin: 20px;
+    }
+
+    img{
+        size: 1.5rem;
+    }
+
+    .flex-item:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="flex-container">
+    <div class="flex-item">
+        <h2>Clothing Items</h2>
+        <img src="clothing.jpg">
+        <button onclick="window.location.href='http://localhost:1000/'"><b>SERVER-1</b></button>
+        <button onclick="window.location.href='map1.html'"><b>LOCATION-1</b></button>
+    </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    <div class="flex-item">
+      <h2>Furniture Items</h2>
+      <img src="furniture.jpg">
+      <button onclick="window.location.href='http://localhost:2000/'"><b>SERVER-2</b></button>
+      <button onclick="window.location.href='map2.html'"><b>LOCATION-2</b></button>
+    </div>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+    <div class="flex-item">
+      <h2>Electronic Items</h2>
+      <img src="electronics.jpg">
+      <button onclick="window.location.href='http://localhost:3000/'"><b>SERVER-3</b></button>
+      <button onclick="window.location.href='map3.html'"><b>LOCATION-3</b></button>
+    </div>
+  </div>
+</body>
+</html>
