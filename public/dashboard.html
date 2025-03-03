@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Management Dashboard</title>
+    <style>
+        /* Add your CSS styles here */
+        /* This is just a basic example */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px;
+        }
+        .status-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Server Management Dashboard</h1>
+        <div class="status-item">
+            <h2>Server Status</h2>
+            <ul>
+                <li>Uptime: {{ server_status['uptime'] }}</li>
+                <li>CPU Usage: {{ server_status['cpu_usage'] }}</li>
+                <li>Memory Usage: {{ server_status['memory_usage'] }}</li>
+                <li>Disk Usage: {{ server_status['disk_usage'] }}</li>
+            </ul>
+        </div>
+        <!-- Add more sections for additional dashboard components -->
+    </div>
+</body>
+</html>

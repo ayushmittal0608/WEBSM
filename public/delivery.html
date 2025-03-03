@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" type="text/css" href="delivery-style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Delivery Status Tracking</h1>
+        <div class="input-container">
+            <label for="tracking-number">Enter Tracking Number:</label><br>
+            <input type="text" id="tracking-number" placeholder="Enter your tracking number">
+            <button onclick="trackDelivery()">Track</button>
+        </div>
+        <div id="status-container" class="status-container">
+            <p id="status-message"></p>
+        </div>
+    </div>
+    <script src="delivery-script.js"></script>
+</body>
+</html>
+
+
+
+

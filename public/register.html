@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Document-login & signup</title>
+    <link rel="stylesheet" href="style-doc2.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form id="signup-form">
+                <h1>Create Account</h1><br>
+                <div id="code">
+                    <input type="text" name="customerCode" placeholder="Customer Code" id="cust_id" required />
+                    <span class="formerror"></span>
+                </div>
+                <div id="name">
+                    <input type="text" name="customerName" placeholder="Customer Name" required />
+                    <span class="formerror"></span>
+                </div>
+                <div id="password">
+                    <input type="password" name="password" placeholder="Password" id="cust_password" required />
+                    <span class="formerror"></span>
+                </div>
+                <div id="confirm_password">
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+                    <span class="formerror"></span>
+                </div>
+                <div id="address">
+                    <input type="text" name="address" placeholder="Address" required />
+                    <span class="formerror"></span>
+                </div>
+                <div id="phone_no">
+                    <input type="text" name="phoneNumber" placeholder="Phone Number" required />
+                    <span class="formerror"></span>
+                </div>
+                <div id="email">
+                    <input type="email" name="email" placeholder="Mail ID" required /><br>
+                    <span class="formerror"></span>
+                </div>
+                <button type="submit" name="Sign-up">Sign Up</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>Welcome back!</h1>
+                    <p>Please login with your credentials here</p>
+                    <button id="signUp">Log In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    
+<script src="https://kit.fontawesome.com/765383a978.js" crossorigin="anonymous"></script>
+    <script>
+        // Handle form submission using JavaScript
+        document.getElementById('signup-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const form = new FormData(this); // Get the form data
+
+            // Send the form data to the backend using fetch
+            fetch('/register', {
+                method: 'POST',
+                body: form, // Send form data as the request body
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'User registered successfully') {
+                    alert('User registered successfully!');
+                    window.location.href = 'login.html'; // Redirect to login page
+                } else {
+                    alert(data.message); // Show error message
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error registering the user.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<! DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charser="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Document-login & signup</title>
+        <link rel="stylesheet" href="style-doc.css">
+    </head>
+    <body>
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form action="/register" name="myForm" onsubmit="return validateForm()" method="POST">
+                    <h1>Create Account</h1><br>
+                    <div id="code">
+                    <input type="text" name="id" placeholder="Customer Code" id="id" required/>
+                    <span class="formerror"></span>
+                    </div>
+                    <div id="name">
+                    <input type="text" name="cust_name" placeholder="Customer Name" id="name" required/>
+                    <span class="formerror"></span>
+                    </div>
+                    <div id="password">
+                    <input type="password" name="password" placeholder="Password" id="password" required/>
+                    <span class="formerror"></span>
+                    </div>
+                    <div id="confirm password">
+                    <input type="password" name="Confirm Password" placeholder="Confirm Password" required/>
+                    <span class="formerror"></span>
+                    </div>
+                    <div id="address">
+                    <input type="text" name="address" placeholder="Address" id="address" required/>
+                    <span class="formerror"></span>
+                    </div>
+                    <div id="phone no">
+                    <input type="text" name="phone_no" placeholder="Phone Number" id="phone_no" required/>
+                    <span class="formerror"></span>
+                    </div>
+                    <div id="email">
+                    <input type="email" name="email" placeholder="Mail ID" id="email" required/><br>
+                    <span class="formerror"></span>
+                    </div>
+                    <button type="submit" name="Sign-up" onclick="registerUser()">Sign Up</button>
+                </form>
+                <p id="message"></p>
+            </div>
+            <div class="form-container sign-in-container">
+                <form action="/login" method="POST">
+                    <h1>Log in</h1>
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <span>or use your account</span>
+                    <input type="txt" placeholder="Client Code" id="client_code" />
+                    <input type="password" placeholder="Password" id="client_password" /><br>
+                    <button onclick="loginUser()">Log In</button>
+                </form>
+                <p id="message"></p>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome back!</h1>
+                        <p>Please login with your credentials here</p>
+                        <button id="signIn">Log In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Welcome to WEBSM!</h1>
+                        <p>Enter your details and start journey with us</p><br>
+                        <button id="signUp">Create Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/765383a978.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbyp1j61VVgbJxhYNgrNf5fJjwEsFcAn3IWFUlOAVOqqmNmBXnOkSk1tl2PgCzbqlI6mtA/exec'
+			const form = document.forms['myForm']
+		  
+			form.addEventListener('submit', e => {
+			  e.preventDefault()
+			  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+				.then(response => alert("Thank you! your form is submitted successfully." ))
+				.then(() => {  window.location.reload(); })
+				.catch(error => console.error('Error!', error.message))
+			})
+		</script>
+        <script type="text/javascript">
+            const signUpButton = document.getElementById('signUp');
+            const signInButton = document.getElementById('signIn');
+            const container = document.getElementById('container');
+
+            signUpButton.addEventListener('click', () => {
+                container.classList.add("right-panel-active");
+                window.location.href = "register.html";
+            });
+
+            signInButton.addEventListener('click', () => {
+                container.classList.remove("right-panel-active");
+            });
+
+            function myFunction(){
+                container.classList.add("right-panel-active");
+            }
+            function clearerrors(){
+                errors=document.getElementsByClassName('formerror');
+                for(let item of errors){
+                    item.innerHTML="";
+                }
+            }
+            function seterror(id, error){
+                element=document.getElementByName(id);
+                element.getElementByClassName('formerror')[0].innerHTML=error;
+            }
+            function validateForm(){
+                var returnval=true;
+                var name=document.forms['myForm']['Customer Name'].value;
+                if(name.length<5){
+                    seterror("name", "Length of name is too short");
+                    returnval=false;
+                }
+                if(name.length==0){
+                    seterror("name", "Length of name cannot be zero.");
+                    returnval=false;
+                }
+                var email=document.forms['myForm']['Mail ID'].value;
+                if(email.length>15){
+                    seterror("email", "Email length is too short.");
+                    returnval=false;
+                }
+                var phone=document.forms['myForm']['Phone Number'].value;
+                if(phone!=10){
+                    seterror("phone", "Phone Number should be of 10 digits.");
+                    returnval=false;
+                }
+                var password=document.forms['myForm']['Password'].value;
+                if(password<6){
+                    seterror("password", "Password should be atleast 6 character long.");
+                    returnval=false;
+                }
+                var cpassword=document.forms['myForm']['Confirm Password'].value;
+                if(cpassword!=password){
+                    seterror("cpassword", "Password and cpassword should match.");
+                    returnval=false;
+                }
+            }
+
+        </script>
+        
+        <script src="login.js"></script>
+    </body>
+</html>

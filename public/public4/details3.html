@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .details {
+            margin-top: 20px;
+        }
+
+        .details label {
+            font-weight: bold;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        .invoice-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .invoice-table th, .invoice-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .invoice-table th {
+            background-color: #f2f2f2;
+        }
+
+        .net-amount {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Invoice</h1>
+        <div class="details">
+            <label>Client Name:</label>
+            <p id="client-demo"></p>
+            <label>Address:</label>
+            <p id="address-demo"></p>
+            <label>City:</label>
+            <p id="city-demo"></p>
+            <label>Tracking ID:</label>
+            <p id="transact.demo"></p>
+        </div>
+        <b><p id='net-amount'></p></b>
+    </div>
+    <script>
+
+        var cd=localStorage.getItem('storedName');
+        document.getElementById('client-demo').innerHTML=cd;
+
+        var add=localStorage.getItem('storedAddress');
+        document.getElementById('address-demo').innerHTML=add;
+
+        var amount=localStorage.getItem('stored');
+        document.getElementById('net-amount').innerHTML='Amount to be paid: Rs.'+amount;
+
+        var city=localStorage.getItem('storedCity');
+        document.getElementById('city-demo').innerHTML=city;
+
+        if(city=='Gurgaon'){
+            document.getElementById('transact.demo').innerHTML='TRK122001';
+        }
+        else if(city=='Bangalore'){
+            document.getElementById('transact.demo').innerHTML='TRK560001';
+        }
+        else if(city=='Pune'){
+            document.getElementById('transact.demo').innerHTML='TRK411001';
+        }
+    </script>
+</body>
+</html>

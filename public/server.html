@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Web Server Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Web Server Management</h1>
+    </header>
+
+    <container>
+        <section>
+            <h2>Server Status</h2>
+            <!-- Display server status information here -->
+        </section>
+
+        <section>
+            <h2>Start/Stop Server</h2>
+            <button id="startButton" onclick="window.location.href='sub-server.html'">Start Server</button>
+            <button id="stopButton">Stop Server</button>
+        </section>
+
+        <section>
+            <h2>Server Configuration</h2>
+            <form id="server-info" name="server-info" action="https://script.google.com/macros/s/AKfycbxT6JdA6c51tdkUDhQ5ttqqsAHLs1qlIM3jpTW8ZGZJOKhTJek8ulXkoh329t1S4-zl/exec" method="POST">
+                <label for="serverPort">Server Port:</label>
+                <input type="number" id="serverPort" name="serverPort">
+                <br>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+                <br>
+                <button id="saveButton">Save Configuration</button>
+            </form>
+        </section>
+    </container>
+    <script type="text/javascript">
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxT6JdA6c51tdkUDhQ5ttqqsAHLs1qlIM3jpTW8ZGZJOKhTJek8ulXkoh329t1S4-zl/exec'
+        const form = document.forms['server-info']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => alert("Thank you! your form is submitted successfully." ))
+            .then(() => {  window.location.reload(); })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+      <script src="server.js"></script>
+</body>
+</html>

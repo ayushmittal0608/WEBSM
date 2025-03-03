@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clothing</title>
+	<link rel="stylesheet" type="text/css" href="payment.css">
+</head>
+<body>
+<header>
+	<div class="container">
+		<div class="left">
+			<h3>BILLING ADDRESS</h3>
+			<form>
+				Full name
+				<input type="text" name="" placeholder="Enter name" id="clientName" required>
+				Email
+				<input type="text" name="" placeholder="Enter email" required/>
+
+				Address
+				<input type="text" name="" placeholder="Enter address" id="address" required/>
+				
+				City
+				<input type="text" name="" placeholder="Enter City" id="city" required/>
+				<div id="zip">
+					<label>
+						State
+						<select>
+							<option>Choose State..</option>
+							<option>Delhi</option>
+							<option>Gujarat</option>
+							<option>Maharashtra</option>
+						</select>
+					</label>
+						<label>
+						Zip code
+						<input type="number" name="" placeholder="Zip code">
+					</label>
+				</div>
+			</form>
+		</div>
+		<div class="right">
+			<h3>PAYMENT</h3>
+			<form>
+				Accepted Card <br>
+				<img src="image/card1.png" width="100">
+				<img src="image/card2.png" width="50">
+				<br><br>
+
+				Credit card number
+			<input type="text" name="" placeholder="Enter card number" id="card_no" required/>
+				
+				Exp month
+				<input type="text" name="" placeholder="Enter Month" id="month" required/>
+				<div id="zip">
+					<label>
+						Exp year
+						<select>
+							<option>Choose Year..</option>
+							<option>2022</option>
+							<option>2023</option>
+							<option>2024</option>
+							<option>2025</option>
+						</select>
+					</label>
+						<label>
+						CVV
+						<input type="number" name="" placeholder="CVV" id="cvv" required/>
+					</label>
+				</div>
+			</form>
+			<input type="submit" name="" value="Proceed to Checkout" id="saveButton" onclick="payment()">
+		</div>
+	</div>
+</header>
+<script src="payment.js"></script>
+<script>
+	const address = document.getElementById("address");
+	const clientName=document.getElementById("clientName");
+	const city=document.getElementById("city");
+	const saveButton = document.getElementById("saveButton");
+
+        saveButton.addEventListener("click", function () {
+			const valueToStore1=clientName.value;
+			localStorage.setItem("storedName", valueToStore1);
+            const valueToStore = address.value;
+            localStorage.setItem("storedAddress", valueToStore);
+			const valueToStore2 = city.value;
+			localStorage.setItem("storedCity", valueToStore2);
+            alert("Value saved to local storage: " + valueToStore+valueToStore1+valueToStore2);
+
+        });
+	function payment(){
+		var card_no=document.getElementById("card_no");
+		if(card_no==""){
+			alert("Card Number is empty.");
+		}
+		var month=document.getElementById("month");
+		if(month==""){
+			alert("Expiry Month is empty.");
+		}
+		var cvv=document.getElementById("cvv");
+		if(cvv==""){
+			alert("CVV code is empty.");
+		}
+		else{
+			window.location.href='invoice.html';
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Information - Web Server Management</title>
+    <link rel="stylesheet" href="client-style.css">
+</head>
+<body>
+    <header>
+        <h1>Client Information</h1>
+    </header>
+    <section id="client-details">
+        <h2>Client Details</h2>
+        <form id="client-info" action="https://script.google.com/macros/s/AKfycbz9bzb5sRiGvMT5Sy5_fYR2CIKFxss6exTvkxPnYabFFKWwaqOnOeS-wYYYG-iBl0PD/exec" method="POST">
+            <div class="input-container">
+                <label for="client-name">Client Name:</label>
+                <input type="text" id="client-name" name="client-name" required>
+            </div>
+            <div class="input-container">
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="company-name" required>
+            </div>
+            <div class="input-container">
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status" required>
+            </div>
+            <button id="saveButton">Save</button>
+        </form>
+    </section>
+    <section id="overview">
+        <h2>Overview</h2>
+        <p>Welcome to our web server management client information page. Here, you can view and update client details.</p>
+    </section>
+    <footer>
+        <p>&copy; 2023 Web Server Management. All rights reserved.</p>
+    </footer>
+    <script type="text/javascript">
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbz9bzb5sRiGvMT5Sy5_fYR2CIKFxss6exTvkxPnYabFFKWwaqOnOeS-wYYYG-iBl0PD/exec'
+			const form = document.forms['client-info']
+		  
+			form.addEventListener('submit', e => {
+			  e.preventDefault()
+			  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+				.then(response => alert("Thank you! your form is submitted successfully." ))
+				.then(() => {  window.location.reload(); })
+				.catch(error => console.error('Error!', error.message))
+			})
+		  </script>
+        <script src="client.js"></script>
+</body>
+</html>

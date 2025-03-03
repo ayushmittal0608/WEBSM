@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="invoice-style.css">
+ </head>
+ <body>
+  <div class="container-fluid">
+   <div class="container">
+    <div class="part1">
+     <fieldset>
+      <h2>Personal Information</h2>
+      Full Name: <input type="text" id="name" /> <br />
+
+      Your Email: <input type="text" id="email" /><br />
+      Your Mobile: <input type="text" id="mobile" /><br />
+      <h2>Your Orders</h2>
+      Shirt (Rs. 1200): <input type="text" id="smosa" /> <br />
+      Pant (Rs. 800): <input type="text" id="kachori" /><br />
+      Shoes (Rs. 6000): <input type="text" id="vadapav" /><br />
+      Glasses (Rs. 500): <input type="text" id="maggi" /><br />
+    
+     <h2>Your Bill</h2>
+     <h3>Your Name:<span id="name2"></span></h3>
+     <h3>Email: <span id="email2"></span></h3>
+     <h3>Mobile: <span id="mobile2"></span></h3>
+     <table border="1">
+      <thead>
+       <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+       </tr>
+      </thead>
+      <tbody id="bill">
+       <tr>
+        <td>Shirt</td>
+        <td>Rs. 1200</td>
+        <td>1</td>
+        <td>1200x1 = 1200</td>
+       </tr>
+      </tbody>
+     </table>
+     <h2>Total Amount: Rs. <span id="amount">0</span></h2>
+    <button id="btn-primary" onclick="window.location.href='details1.html'">Submit</button>
+    <button id="btn-secondary" onclick="window.location.href='invoice.html'">Cancel</button>
+    </fieldset>
+   </div>
+  </div>
+ </body>
+ <script src="invoice-script.js"></script>
+</html>

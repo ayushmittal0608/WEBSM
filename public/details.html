@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .details {
+            margin-top: 20px;
+        }
+
+        .details label {
+            font-weight: bold;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        .invoice-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .invoice-table th, .invoice-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .invoice-table th {
+            background-color: #f2f2f2;
+        }
+
+        .net-amount {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Invoice</h1>
+        <div class="details">
+            <label>Client Name:</label>
+            <p id="client-demo"></p>
+
+            <label>Server Name:</label>
+            <p id="server-demo"></p>
+
+            <label>Address:</label>
+            <p id="address-demo"></p>
+
+            <label>City:</label>
+            <p id="city-demo"></p>
+
+            <label>Tracking ID:</label>
+            <p>TRK123456789</p>
+
+            <label>Invoice Number:</label>
+            <p>INV2023001</p>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Product A</td>
+                    <td>Description of Product A</td>
+                    <td>2</td>
+                    <td>$50.00</td>
+                    <td>$100.00</td>
+                </tr>
+                <tr>
+                    <td>Product B</td>
+                    <td>Description of Product B</td>
+                    <td>3</td>
+                    <td>$30.00</td>
+                    <td>$90.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="net-amount">Net Amount: $190.00</p>
+    </div>
+    <script>
+        var sd=localStorage.getItem('storedValue');
+        document.getElementById('server-demo').innerHTML="http://localhost:"+sd;
+
+        var cd=localStorage.getItem('clientValue');
+        document.getElementById('client-demo').innerHTML=cd;
+
+        var add=localStorage.getItem('storedAddress');
+        document.getElementById('address-demo').innerHTML=add;
+
+        var city=localStorage.getItem('storedCity');
+        document.getElementById('city-demo').innerHTML=city;
+    </script>
+</body>
+</html>
